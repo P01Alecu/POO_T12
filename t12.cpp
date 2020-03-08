@@ -1,125 +1,10 @@
-#include "pch.h"
 #include <iostream>
 #include <string.h>
 #include "grupa.h"
 #include <windows.h>
 
 using namespace std;
-/*
-int echar(char *c1, char *c2){
-    if(strlen(c1)!=strlen(c2))
-        return 0;
-    else{
-        for(int i=0; i < strlen(c1); i++){
-            if(c1[i]!=c2[i])
-                return 0;
-        }
-    }
-    return 1;
-}
 
-class student {
-private:
-	char *nume;
-	int an_nastere;
-	int numar_credite;
-	double medie_generala;
-public:
-	student(char*, int, int, double);                     ///constructor initializare
-	student(student&);                     ///constructor copiere
-	~student();                            ///destructor
-
-	void set(char*, int, int, double); //set
-	void set(student&); //set copy
-
-	void afisare(ostream &out);
-	void citire(istream &in);
-	friend istream& operator>>(istream &in, student& z);  ///supraincarcare pe >>
-	friend ostream& operator<<(ostream &out, student& z); ///supraincarcare pe <<
-
-	char *getNume();
-};
-
-student::student(char *nume = NULL, int an_nastere = 0, int numar_credite = 0, double medie_generala = 0) { ///initializare
-	//this->nume = nume;
-	if (nume != NULL) {
-		this->nume = new char[strlen(nume)];
-		strcpy(this->nume, nume);
-	}
-	this->an_nastere = an_nastere;
-	this->numar_credite = numar_credite;
-	this->medie_generala = medie_generala;
-}
-student::student(student &s) {   ///copiere
-	//this->nume = s.nume;
-	if (s.nume != NULL) {
-		this->nume = new char[strlen(s.nume)];
-		strcpy(this->nume, s.nume);
-	}
-	this->an_nastere = s.an_nastere;
-	this->numar_credite = s.numar_credite;
-	this->medie_generala = s.medie_generala;
-}
-student::~student() {    ///destructorul
-	this->nume = NULL;
-	this->an_nastere = 0;
-	this->numar_credite = 0;
-	this->medie_generala = 0;
-}
-
-void student::set(char *nume, int an_nastere = 0, int numar_credite = 0, double medie_generala = 0) {
-	//this->nume = nume;
-    if (nume != NULL) {
-		this->nume = new char[strlen(nume)];
-		strcpy(this->nume, nume);
-	}
-	this->an_nastere = an_nastere;
-	this->numar_credite = numar_credite;
-	this->medie_generala = medie_generala;
-}
-
-void student::set(student &s) {
-	//this->nume = s.nume;
-    if (s.nume != NULL) {
-		this->nume = new char[strlen(s.nume)];
-		strcpy(this->nume, s.nume);
-	}
-	this->an_nastere = s.an_nastere;
-	this->numar_credite = s.numar_credite;
-	this->medie_generala = s.medie_generala;
-}
-
-
-void student::citire(istream &in) {
-	cout << "Cititi numele studentului: ";
-	char *num;
-    in.getline(num,250);
-    this->nume=new char[strlen(num)];
-    strcpy(this->nume,num);
-
-	cout << "Cititi anul nasterii al studentului: ";
-	in >> an_nastere;
-	cout << "Cititi numarul de credite ale studentului: ";
-	in >> numar_credite;
-	cout << "Cititi media generala a studentului: ";
-	in >> medie_generala;
-}
-istream& operator>>(istream& in, student& z) {
-	z.citire(in);
-	return in;
-}
-
-void student::afisare(ostream &out) {
-	out << "Nume student: " << nume << "\nAnul nasterii: " << an_nastere << "\nNumar credite: " << numar_credite << "\nMedie generala: " << medie_generala;
-}
-ostream& operator<<(ostream& out, student& z) {
-	z.afisare(out);
-	return out;
-}
-char *student::getNume() {
-	return this->nume;
-}
-*/
 void menu_output1()
 {
 	cout << "\n Alecu Florin Gabriel - Grupa 211 - 12 - Nume proiect: \n";
@@ -135,14 +20,14 @@ void menu_output1()
 void menu_output2()
 {
 	cout << "\n Alecu Florin Gabriel - Grupa 211 - 12 - Nume proiect: \n";
-	cout << "\n\t MENIU:";
+	cout << "\n\t MENIUL GRUPEI " << " :";
 	cout << "\n===========================================\n";
 	cout << "\n";
-	cout << "1. Adauga un student in grupa.\n";
-	cout << "2. Afisaza studentii din grupa.\n";
-	cout << "3. Elimina un student in grupa.\n";
-	cout << "4. Verifica dupa nume daca un student se afla in grupa.\n";
+	cout << "1. Creaza o grupa.\n";
+	cout << "2. Sterge o grupa.\n";
+	cout << "3. Intra in grupa pentru modificari.\n";
 	cout << "0. Iesire.\n";
+	cout << "\n Grupe existente: ";
 }
 void menu()
 {
@@ -167,7 +52,7 @@ void menu()
 		}
 		if (option == 2) {
 			//Afisare
-			gr.afisare();
+			cout << gr;
 		}
 		if (option == 3)
 		{
@@ -215,7 +100,17 @@ void menu()
 }
 
 int main() {
-    menu();
+    //menu();
+
+    grupa *a = new grupa[5];
+    student s("Alecu", 1, 2, 3);
+    a[0].adauga(s);
+
+    //grupa b(a[0]);
+    grupa b;
+    b = a[0];
+    cout<<b;
+
 
 	return 0;
 }

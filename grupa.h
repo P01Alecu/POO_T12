@@ -14,6 +14,7 @@ int echar(char *c1, char *c2){
 
 class grupa {
 private:
+	char *nume_grupa;
 	int nr_studenti;
 	int nr_max_studenti;
 	student *v = new student[30];	// vector de studenti alocat dinamic?---------------------------------------------------------
@@ -23,7 +24,6 @@ public:
 	grupa();
 	//grupa(int, student);         /////////////////////////////////////////
 	grupa(grupa&);				//constructor copiere
-	grupa(grupa&, int);				//constructor copiere modificare nr studenti
 	~grupa();
 	//eliminare student din grupa//
 	void elimina(char*);
@@ -33,15 +33,22 @@ public:
 	void verificare(char*);
 	int returnNrStudenti();
 	void afisareNumeStudenti();
-	void afisare();
+	void afisare(ostream &out);
+	friend ostream& operator<<(ostream &out, grupa& g); //supraincarcare <<
+	void copie(grupa&);
 };
 grupa::grupa() {
 	this->nr_studenti = 0;
 	this->medie_generala_grupa = 0;
 }	  //constructor
 
-grupa::grupa(grupa&){
-
+grupa::grupa(grupa& g){
+	this->nr_studenti = g.nr_studenti;
+	this->nr_max_studenti = g.nr_max_studenti;
+	this->medie_generala_grupa = g.medie_generala_grupa;
+	nume_grupa = g.nume_grupa;
+	for(int i = 0; i < nr_studenti; i++)
+		v[i].set(g.v[i]);
 }
 
 grupa::~grupa() {
@@ -96,11 +103,15 @@ void grupa::afisareNumeStudenti() {
 int grupa::returnNrStudenti() {
 	return this->nr_studenti;
 }
-void grupa::afisare() {
+void grupa::afisare(ostream &out) {
 	int i;
 	for (i = 0; i < this->nr_studenti; i++) {
-		cout << this->v[i] << "\n\n";
+		out << this->v[i] << "\n\n";
 	}
 	if (i == 0)
-		cout << "Nu exista studenti in aceasta grupa!";
+		out << "Nu exista studenti in aceasta grupa!";
+}
+ostream &operator<<(ostream& out, grupa &g){
+	g.afisare(out);
+	return out;
 }
