@@ -95,7 +95,12 @@ istream& operator>>(istream& in, student& z) {
 }
 
 void student::afisare(ostream &out) {
-	out << "Nume student: " << nume << "\nAnul nasterii: " << an_nastere << "\nNumar credite: " << numar_credite << "\nMedie generala: " << medie_generala;
+	//if(nume!=NULL && nume!="")
+	//	out << "Nume student: " << nume << "\nAnul nasterii: " << an_nastere << "\nNumar credite: " << numar_credite << "\nMedie generala: " << medie_generala;
+		out << "Nume student: " << nume << "\nAnul nasterii: " << an_nastere << "\nNumar credite: " << numar_credite << "\nMedie generala: " << medie_generala << "\n";
+	//else
+	//	out << "Nu a fost introdus acest student!\n";
+
 }
 ostream& operator<<(ostream& out, student& z) {
 	z.afisare(out);

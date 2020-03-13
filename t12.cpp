@@ -5,7 +5,7 @@
 
 using namespace std;
 
-void menu_output1()
+void menu_output()
 {
 	cout << "\n Alecu Florin Gabriel - Grupa 211 - 12 - Nume proiect: \n";
 	cout << "\n\t MENIU:";
@@ -17,7 +17,7 @@ void menu_output1()
 	cout << "4. Verifica dupa nume daca un student se afla in grupa.\n";
 	cout << "0. Iesire.\n";
 }
-void menu_output2()
+void menu_outside()
 {
 	cout << "\n Alecu Florin Gabriel - Grupa 211 - 12 - Nume proiect: \n";
 	cout << "\n\t MENIUL GRUPEI " << " :";
@@ -37,14 +37,13 @@ void menu()
 	grupa gr;
 	do
 	{
-		menu_output1();
+		menu_output();
 
 		cout << "\nIntroduceti numarul actiunii: ";
 		cin >> option;
 
 		if (option == 1)
 		{
-			//student q("Alecu", 1, 1, 1);
 			student q;
 			cin >> q;
 			cout << q;
@@ -100,17 +99,7 @@ void menu()
 }
 
 int main() {
-    //menu();
-
-    grupa *a = new grupa[5];
-    student s("Alecu", 1, 2, 3);
-    a[0].adauga(s);
-
-    //grupa b(a[0]);
-    grupa b;
-    b = a[0];
-    cout<<b;
-
+    menu();
 
 	return 0;
 }
