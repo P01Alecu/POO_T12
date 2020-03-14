@@ -56,18 +56,14 @@ void menu()
 		if (option == 3)
 		{
 			char *nume;
-			if (gr.returnNrStudenti() == 0)
-				cout << "Nu exista studenti in grupa!!";
-			else {
-				cout << "Studentii din grupa: \n";
-				gr.afisareNumeStudenti();	//Afisaza numele studentilor din grupa
-				cout << "Introduceti numele studentului pe care vreti sa il eliminati din grupa: \n";
-				//cin >> nume;
-                    //cin.getline(nume,256);
-                nume = new char[256];
-                cin >> nume;
-            }
-				gr.elimina(nume);
+			if(gr.returnNrStudenti() > 0 ){
+            cout << "Studentii din grupa: \n";
+            gr.afisareNumeStudenti();	//Afisaza numele studentilor din grupa
+            cout << "Introduceti numele studentului pe care vreti sa il eliminati din grupa: \n";
+            nume = new char[256];
+            cin >> nume;
+			}
+            gr.elimina(nume);
 			}
 
 		if (option == 4)

@@ -60,7 +60,7 @@ grupa::~grupa() {
 void grupa::adauga(student s){
 	student *temp;
 	temp = new student[nr_studenti];
-	
+
 	for(int i = 0; i <= nr_studenti-1; i++)
 		temp[i].set(v[i]);
 
@@ -73,8 +73,8 @@ void grupa::adauga(student s){
 	this->v = new student[nr_studenti];
 
 	if(nr_studenti > 1)
-	
-		for(int i = 0; i<=nr_studenti-2; i++){       //////crash pentru nr_studenti = 3
+
+		for(int i = 0; i<=nr_studenti-2; i++){
 			v[i].set(temp[i]);
 			//cout<<v[i]<<"\n"; //debug
 		}
@@ -84,35 +84,42 @@ void grupa::adauga(student s){
 }
 
 
-void grupa::elimina(char *nume) {
-		bool ok = 1;
-		student *temp;
-		temp = new student[nr_studenti];
+void grupa::elimina(char *nume = NULL) {
+		if(nr_studenti > 0){
+			bool ok = 1;
+			student *temp;
+			temp = new student[nr_studenti - 1];
 
-		for (int i = 0; i < (this->nr_studenti) - 1; i++) {
-			if (echar(nume, this->v[i].getNume())!=0){
+			for(int i = 0; i < nr_studenti - 1; i++){
+				if(echar(nume, v[i].getNume()) != 0)
+					ok = 0;
+				if(ok)
+					temp[i].set(v[i]);
+				if(!ok)
+					temp[i].set(v[i+1]);
+			}
+			if(echar(nume, v[nr_studenti-1].getNume())!=0)
 				ok = 0;
+			if(ok == 0){
+				delete[] v;
+				this->nr_studenti--;
+				v = new student[nr_studenti];
+				for(int i = 0; i < nr_studenti; i++)
+					v[i].set(temp[i]);
+
+				delete[] temp;
+				cout << "Studentul a fost sters din grupa!\n";
 			}
-			if (!ok) {
-				//continue;
-				this->v[i].set(this->v[i + 1]);
-			}
+			else
+				cout << "Studentul nu exista!\n";
 		}
-		if (ok && echar(this->v[this->nr_studenti - 1].getNume(), nume)!=0) {  //cazul in care studentul este pe ultima pozitie din vector
-			this->v[this->nr_studenti - 1].set(NULL, 0, 0, 0);
-			ok = 0;
-		}
-		if (ok == 0) { //daca s-a sters
-			this->nr_studenti--;
-			cout << "Student sters din grupa!\n";
-		}
-		else //daca nu exista
-			cout << "Studentul nu exista!";
+		else
+			cout << "Nu exista studenti in grupa!!\n";
 }
 void grupa::verificare(char *nume) {
 	bool ok = false;
 	for (int i = 0; i < nr_studenti; i++) {
-		if (echar(this->v[i].getNume(), nume) != 0) {
+		if (echar(v[i].getNume(), nume) != 0) {
             //cout<<"\n"<<this->v[i].getNume()<<" == "<<nume;
 			ok = true;
 			break;
@@ -124,12 +131,12 @@ void grupa::verificare(char *nume) {
 		cout << "Elevul NU se afla in grupa\n";
 }
 void grupa::afisareNumeStudenti() {
-	for (int i=0; i < this->nr_studenti; i++) {
-		cout << this->v[i].getNume() << "\n";
+	for (int i=0; i < nr_studenti; i++) {
+		cout << v[i].getNume() << "\n";
 	}
 }
 int grupa::returnNrStudenti() {
-	return this->nr_studenti;
+	return nr_studenti;
 }
 void grupa::afisare(ostream &out) {
 	int i;
