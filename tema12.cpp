@@ -117,7 +117,6 @@ char *student::getNume() {
 ////////////////////////////////////////////////////////////////////grupa
 class grupa {
 private:
-	char *nume_grupa;
 	int nr_studenti;
 	student *v;
 	double medie_generala_grupa;
@@ -146,7 +145,6 @@ grupa::grupa() {
 grupa::grupa(grupa& g){
 	this->nr_studenti = g.nr_studenti;
 	this->medie_generala_grupa = g.medie_generala_grupa;
-	nume_grupa = g.nume_grupa;
 	this->v = new student[nr_studenti];
 	for(int i = 0; i < nr_studenti; i++)
 		v[i].set(g.v[i]);
@@ -154,6 +152,8 @@ grupa::grupa(grupa& g){
 
 grupa::~grupa() {
 	delete[] v;
+	nr_studenti = 0;
+	medie_generala_grupa = 0;
 }   //destructor
 
 void grupa::adauga(student s){
